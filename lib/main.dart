@@ -11,10 +11,17 @@ void main() {
 class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Todo List',
-        home: Center(
-          child: Text('Hello World!'),
-        ));
+    return MaterialApp(title: 'Todo List', home: BaseWidget());
+  }
+}
+
+// Scaffold is the basic setup for a page in your app. It's like a blank canvas where you can place different widgets to build your UI. Hover over the Scaffold widget to get more information about it.
+class BaseWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Todo List')),
+      body: Center(child: Text('Hello World')),
+    );
   }
 }
