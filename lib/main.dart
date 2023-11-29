@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/add_task_button.dart';
 import 'package:todo_app/app_logic.dart';
+import 'package:todo_app/history_list.dart';
 
 // The runApp() function is a Flutter function that takes as its argument a Widget which the framework inflates and attaches to the screen's root to render it.
 void main() {
@@ -29,7 +30,7 @@ class _BaseWidgetState extends State<BaseWidget> {
 
   final pages = [
     PendingList(),
-    Container(child: Center(child: Text('History Page'))),
+    HistoryList(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -93,9 +94,9 @@ class _PendingListState extends State<PendingList> {
 
     // ListView.builder is a better choice when dealing with a large number of items because it only builds those items that are currently visible on the screen, which can greatly improve the performance of your app.
     return ListView.builder(
-      itemCount: AppLogic.widgetList.length,
+      itemCount: AppLogic.pendingWidgetList.length,
       itemBuilder: (context, index) {
-        return AppLogic.widgetList[index];
+        return AppLogic.pendingWidgetList[index];
       },
     );
   }

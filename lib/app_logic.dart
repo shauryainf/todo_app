@@ -2,25 +2,41 @@ import 'package:flutter/material.dart';
 
 class AppLogic {
   static late Function updatePendingList;
+  static late Function updateHistoryList;
 
-  static List<Widget> widgetList = [];
+  static List<Widget> pendingWidgetList = [];
+  static List<Widget> historyWidgetList = [];
 
-  AppLogic(Function updatePendingListRecieved) {
+  AppLogic(
+    Function updatePendingListRecieved,
+  ) {
     AppLogic.updatePendingList = updatePendingListRecieved;
-    widgetList.add(CustomListTile(
+
+    pendingWidgetList.add(CustomListTile(
       title: "Understand Basics of Flutter",
       isChecked: false,
     ));
 
-    widgetList.add(CustomListTile(
+    pendingWidgetList.add(CustomListTile(
       title: "Exploring State of a Widget",
       isChecked: false,
     ));
   }
 
+  static void initializeHistoryList(Function updateHistoryListRecieved) {
+    AppLogic.updateHistoryList = updateHistoryListRecieved;
+  }
+
   static void addNewTask(String newTask) {
-    widgetList.add(CustomListTile(title: newTask, isChecked: false));
+    pendingWidgetList.add(CustomListTile(title: newTask, isChecked: false));
     updatePendingList();
+  }
+
+  static void dismissTask(Widget task) {
+    pendingWidgetList.remove(task);
+    historyWidgetList.remove(task);
+    historyWidgetList.add(task);
+    updateHistoryList();
   }
 }
 
@@ -48,9 +64,9 @@ class _CustomListTileState extends State<CustomListTile> {
             widget.title +
             " : " +
             direction.toString());
-        setState(() {
-          AppLogic.widgetList.remove(this.widget);
-        });
+
+        AppLogic.dismissTask(this.widget);
+        setState(() {});
         AppLogic.updatePendingList();
       },
       child: CheckboxListTile(
