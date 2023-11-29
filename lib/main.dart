@@ -29,19 +29,33 @@ class BaseWidget extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          ListTile(
-            title: Text('Understand Basics of Flutter',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            trailing: Checkbox(
-              value: false,
-              onChanged: (value) {
-                print(value);
-              },
-            ),
-          ),
+          CustomListTile(
+              title: 'Understand Basics of Flutter', isChecked: true),
+          CustomListTile(
+              title: 'Understand Basics of Flutter 2', isChecked: false),
+          CustomListTile(
+              title: 'Understand Basics of Flutter 3', isChecked: false),
         ],
       ),
     );
+  }
+}
+
+class CustomListTile extends StatelessWidget {
+  String title;
+  bool isChecked;
+
+  CustomListTile({required this.title, this.isChecked = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+        title: Text(title,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+        value: isChecked,
+        onChanged: (value) {
+          print(value.toString() + " : " + title);
+        });
   }
 }
 
