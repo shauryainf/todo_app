@@ -21,38 +21,27 @@ class BaseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Todo List',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-          backgroundColor: Colors.red,
-          foregroundColor: Colors.white,
-        ),
-        body: Center(
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Hello', style: TextStyle(fontSize: 50)),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Text('Hello World 1', style: TextStyle(fontSize: 50)),
-                    Text('Hello World 2', style: TextStyle(fontSize: 50)),
-                    Text('Hello World 2', style: TextStyle(fontSize: 50)),
-                    Text('Hello World 2', style: TextStyle(fontSize: 50)),
-                    Text('Hello World 2', style: TextStyle(fontSize: 50)),
-                    Text('Hello World 2', style: TextStyle(fontSize: 50)),
-                    Text('Hello World 2', style: TextStyle(fontSize: 50)),
-                    Text('Hello World 2', style: TextStyle(fontSize: 50)),
-                  ],
-                ),
-              ),
-              Text('Hello World 3',
-                  style: GoogleFonts.pacifico(
-                      fontSize: 50, fontWeight: FontWeight.bold)),
-            ],
+      appBar: AppBar(
+        title: Text('Todo List',
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+        backgroundColor: Colors.red,
+        foregroundColor: Colors.white,
+      ),
+      body: ListView(
+        children: [
+          ListTile(
+            title: Text('Understand Basics of Flutter',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            trailing: Checkbox(
+              value: false,
+              onChanged: (value) {
+                print(value);
+              },
+            ),
           ),
-        ));
+        ],
+      ),
+    );
   }
 }
 
