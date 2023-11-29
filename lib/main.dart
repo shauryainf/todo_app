@@ -58,8 +58,13 @@ class _PendingListState extends State<PendingList> {
   @override
   Widget build(BuildContext context) {
     print('PendingList Widget: Building Widget');
-    return ListView(
-      children: AppLogic.widgetList,
+
+    // ListView.builder is a better choice when dealing with a large number of items because it only builds those items that are currently visible on the screen, which can greatly improve the performance of your app.
+    return ListView.builder(
+      itemCount: AppLogic.widgetList.length,
+      itemBuilder: (context, index) {
+        return AppLogic.widgetList[index];
+      },
     );
   }
 }

@@ -13,9 +13,16 @@ class AddTaskButton extends StatelessWidget {
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: Text('Enter text'),
+              title: Text('Add Task'),
               content: TextField(
+                // Cursor will be automatically focused on the text field
                 autofocus: true,
+
+                // When the user presses the enter / done button
+                onSubmitted: (value) {
+                  AppLogic.addNewTask(value);
+                  Navigator.of(context).pop();
+                },
                 onChanged: (value) {
                   inputText = value;
                 },
