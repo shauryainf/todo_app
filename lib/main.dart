@@ -19,7 +19,18 @@ class TodoApp extends StatelessWidget {
 }
 
 // Scaffold is the basic setup for a page in your app. It's like a blank canvas where you can place different widgets to build your UI. Hover over the Scaffold widget to get more information about it.
-class BaseWidget extends StatelessWidget {
+class BaseWidget extends StatefulWidget {
+  @override
+  State<BaseWidget> createState() => _BaseWidgetState();
+}
+
+class _BaseWidgetState extends State<BaseWidget> {
+  int currentIndex = 0;
+
+  final pages = [
+    PendingList(),
+    Container(child: Center(child: Text('History Page'))),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +41,28 @@ class BaseWidget extends StatelessWidget {
         foregroundColor: Colors.white,
       ),
       floatingActionButton: AddTaskButton(),
-      body: PendingList(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: 'History',
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+      ),
+      body: IndexedStack(
+        index: currentIndex,
+        children: pages,
+      ),
     );
   }
 }
