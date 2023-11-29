@@ -40,8 +40,8 @@ class AddTaskButton extends StatelessWidget {
           },
         );
       },
-      child: Icon(Icons.add, color: Colors.white),
-      backgroundColor: Colors.red,
+      child: Icon(Icons.add, color: Colors.white, size: 30),
+      backgroundColor: Colors.redAccent,
     );
   }
 }

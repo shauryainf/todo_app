@@ -15,7 +15,11 @@ void main() {
 class TodoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Todo List', home: BaseWidget());
+    return MaterialApp(
+      title: 'Todo List',
+      home: BaseWidget(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 
@@ -38,7 +42,18 @@ class _BaseWidgetState extends State<BaseWidget> {
       appBar: AppBar(
         title: Text('Todo List',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.red,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[
+                Colors.redAccent,
+                Colors.purple,
+              ],
+            ),
+          ),
+        ),
         foregroundColor: Colors.white,
       ),
       floatingActionButton: AddTaskButton(),
