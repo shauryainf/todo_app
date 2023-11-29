@@ -41,9 +41,21 @@ class _BaseWidgetState extends State<BaseWidget> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Todo List',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+            style: GoogleFonts.comicNeue(
+              textStyle: TextStyle(
+                fontSize: 38,
+                fontWeight: FontWeight.bold,
+              ),
+            )),
         flexibleSpace: Container(
           decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 3,
+                blurRadius: 10,
+              ),
+            ],
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -57,23 +69,35 @@ class _BaseWidgetState extends State<BaseWidget> {
         foregroundColor: Colors.white,
       ),
       floatingActionButton: AddTaskButton(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'History',
-          ),
-        ],
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+          selectedItemColor: Colors.redAccent,
+          unselectedItemColor: Colors.grey,
+          currentIndex: currentIndex,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'History',
+            ),
+          ],
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+        ),
       ),
       body: IndexedStack(
         index: currentIndex,
@@ -108,11 +132,14 @@ class _PendingListState extends State<PendingList> {
     print('PendingList Widget: Building Widget');
 
     // ListView.builder is a better choice when dealing with a large number of items because it only builds those items that are currently visible on the screen, which can greatly improve the performance of your app.
-    return ListView.builder(
-      itemCount: AppLogic.pendingWidgetList.length,
-      itemBuilder: (context, index) {
-        return AppLogic.pendingWidgetList[index];
-      },
+    return Container(
+      padding: EdgeInsets.only(top: 25),
+      child: ListView.builder(
+        itemCount: AppLogic.pendingWidgetList.length,
+        itemBuilder: (context, index) {
+          return AppLogic.pendingWidgetList[index];
+        },
+      ),
     );
   }
 }

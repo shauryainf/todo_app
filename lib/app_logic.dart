@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppLogic {
   static late Function updatePendingList;
@@ -19,6 +20,21 @@ class AppLogic {
 
     pendingWidgetList.add(CustomListTile(
       title: "Exploring State of a Widget",
+      isChecked: false,
+    ));
+
+    pendingWidgetList.add(CustomListTile(
+      title: "Understand Basic Navigation",
+      isChecked: false,
+    ));
+
+    pendingWidgetList.add(CustomListTile(
+      title: "Understand Basic Theming",
+      isChecked: false,
+    ));
+
+    pendingWidgetList.add(CustomListTile(
+      title: "Deploying Flutter App",
       isChecked: false,
     ));
   }
@@ -70,15 +86,15 @@ class _CustomListTileState extends State<CustomListTile> {
         AppLogic.updatePendingList();
       },
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(vertical: 9, horizontal: 18),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.all(Radius.circular(15)),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
+              color: Colors.black.withOpacity(0.2),
+              spreadRadius: 1,
+              blurRadius: 5,
               offset: Offset(0, 3),
             ),
           ],
@@ -100,13 +116,16 @@ class _CustomListTileState extends State<CustomListTile> {
               borderRadius: BorderRadius.all(Radius.circular(15)),
               color: Colors.white),
           child: CheckboxListTile(
-              title: Text(widget.title,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    decoration:
-                        widget.isChecked ? TextDecoration.lineThrough : null,
-                  )),
+              title: Text(
+                widget.title,
+                style: GoogleFonts.comicNeue(
+                    textStyle: TextStyle(
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold,
+                  decoration:
+                      widget.isChecked ? TextDecoration.lineThrough : null,
+                )),
+              ),
               value: widget.isChecked,
               onChanged: (value) {
                 print("CustomListTile Widget : ON Change Called :  " +
