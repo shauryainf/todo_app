@@ -40,22 +40,24 @@ class PendingList extends StatefulWidget {
 }
 
 class _PendingListState extends State<PendingList> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    AppLogic(updatePendingList);
+    super.initState();
+  }
+
   void updatePendingList() {
     setState(() {
-      print("Updating List");
+      print("PendingList Widget: SetState called");
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    print('Building Pending List');
+    print('PendingList Widget: Building Widget');
     return ListView(
-      children: [
-        CustomListTile(
-            title: 'Understand Basics of Flutter',
-            isChecked: true,
-            updatePendingList: updatePendingList),
-      ],
+      children: AppLogic.widgetList,
     );
   }
 }
