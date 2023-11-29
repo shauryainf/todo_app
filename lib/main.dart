@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/add_task_button.dart';
 import 'package:todo_app/app_logic.dart';
 
 // The runApp() function is a Flutter function that takes as its argument a Widget which the framework inflates and attaches to the screen's root to render it.
@@ -28,6 +29,7 @@ class BaseWidget extends StatelessWidget {
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
       ),
+      floatingActionButton: AddTaskButton(),
       body: PendingList(),
     );
   }

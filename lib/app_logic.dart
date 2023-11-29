@@ -10,30 +10,28 @@ class AppLogic {
     widgetList.add(CustomListTile(
       title: "Understand Basics of Flutter",
       isChecked: false,
-      updatePendingList: updatePendingList,
     ));
 
     widgetList.add(CustomListTile(
       title: "Exploring State of a Widget",
       isChecked: false,
-      updatePendingList: updatePendingList,
     ));
   }
 
-  static void handelListTileTap() {
+  static void addNewTask(String newTask) {
+    widgetList.add(CustomListTile(title: newTask, isChecked: false));
     updatePendingList();
   }
 }
 
 class CustomListTile extends StatefulWidget {
-  String title;
+  final String title;
   bool isChecked;
-  Function updatePendingList;
 
-  CustomListTile(
-      {required this.title,
-      this.isChecked = false,
-      required this.updatePendingList});
+  CustomListTile({
+    required this.title,
+    this.isChecked = false,
+  });
 
   @override
   State<CustomListTile> createState() => _CustomListTileState();
@@ -42,6 +40,7 @@ class CustomListTile extends StatefulWidget {
 class _CustomListTileState extends State<CustomListTile> {
   @override
   Widget build(BuildContext context) {
+    print("CustomListTile Widget : Building Widget : " + widget.title);
     return CheckboxListTile(
         title: Text(widget.title,
             style: TextStyle(
@@ -51,11 +50,13 @@ class _CustomListTileState extends State<CustomListTile> {
             )),
         value: widget.isChecked,
         onChanged: (value) {
-          print(value.toString() + " : " + widget.title);
+          print("CustomListTile Widget : ON Change Called :  " +
+              value.toString() +
+              " : " +
+              widget.title);
           setState(() {
             widget.isChecked = value!;
           });
-          // AppLogic.handelListTileTap();
         });
   }
 }
