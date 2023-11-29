@@ -41,22 +41,36 @@ class _CustomListTileState extends State<CustomListTile> {
   @override
   Widget build(BuildContext context) {
     print("CustomListTile Widget : Building Widget : " + widget.title);
-    return CheckboxListTile(
-        title: Text(widget.title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              decoration: widget.isChecked ? TextDecoration.lineThrough : null,
-            )),
-        value: widget.isChecked,
-        onChanged: (value) {
-          print("CustomListTile Widget : ON Change Called :  " +
-              value.toString() +
-              " : " +
-              widget.title);
-          setState(() {
-            widget.isChecked = value!;
-          });
+    return Dismissible(
+      key: UniqueKey(),
+      onDismissed: (direction) {
+        print("CustomListTile Widget : On Dismissed Called : " +
+            widget.title +
+            " : " +
+            direction.toString());
+        setState(() {
+          AppLogic.widgetList.remove(this.widget);
         });
+        AppLogic.updatePendingList();
+      },
+      child: CheckboxListTile(
+          title: Text(widget.title,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                decoration:
+                    widget.isChecked ? TextDecoration.lineThrough : null,
+              )),
+          value: widget.isChecked,
+          onChanged: (value) {
+            print("CustomListTile Widget : ON Change Called :  " +
+                value.toString() +
+                " : " +
+                widget.title);
+            setState(() {
+              widget.isChecked = value!;
+            });
+          }),
+    );
   }
 }
