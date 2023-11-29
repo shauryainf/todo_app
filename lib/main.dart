@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todo_app/app_logic.dart';
 
 // The runApp() function is a Flutter function that takes as its argument a Widget which the framework inflates and attaches to the screen's root to render it.
 void main() {
@@ -27,37 +28,39 @@ class BaseWidget extends StatelessWidget {
         backgroundColor: Colors.red,
         foregroundColor: Colors.white,
       ),
-      body: ListView(
-        children: [
-          CustomListTile(
-              title: 'Understand Basics of Flutter', isChecked: true),
-          CustomListTile(
-              title: 'Understand Basics of Flutter 2', isChecked: false),
-          CustomListTile(
-              title: 'Understand Basics of Flutter 3', isChecked: false),
-        ],
-      ),
+      body: PendingList(),
     );
   }
 }
 
-class CustomListTile extends StatelessWidget {
-  String title;
-  bool isChecked;
+// Stateful widgets are widgets that can change their state over time. These widgets are useful when the UI changes dynamically, like when you want to update the UI in response to user actions or when some data changes.
+class PendingList extends StatefulWidget {
+  @override
+  State<PendingList> createState() => _PendingListState();
+}
 
-  CustomListTile({required this.title, this.isChecked = false});
+class _PendingListState extends State<PendingList> {
+  void updatePendingList() {
+    setState(() {
+      print("Updating List");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return CheckboxListTile(
-        title: Text(title,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-        value: isChecked,
-        onChanged: (value) {
-          print(value.toString() + " : " + title);
-        });
+    print('Building Pending List');
+    return ListView(
+      children: [
+        CustomListTile(
+            title: 'Understand Basics of Flutter',
+            isChecked: true,
+            updatePendingList: updatePendingList),
+      ],
+    );
   }
 }
+
+
 
 
 
