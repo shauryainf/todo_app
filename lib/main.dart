@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // The runApp() function is a Flutter function that takes as its argument a Widget which the framework inflates and attaches to the screen's root to render it.
 void main() {
@@ -46,7 +47,9 @@ class BaseWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              Text('Hello World 3', style: TextStyle(fontSize: 50)),
+              Text('Hello World 3',
+                  style: GoogleFonts.pacifico(
+                      fontSize: 50, fontWeight: FontWeight.bold)),
             ],
           ),
         ));
